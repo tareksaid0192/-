@@ -2,7 +2,5 @@
   "name": "معاً نقدر - Maana Naqder",
   "description": "تطبيق معاً نقدر لدعم الأمهات في التعامل مع سلوكيات الأطفال وإرشادات تعديل السلوك ومتابعة التحسن اليومي مع استشارات فورية.",
   "permissions": [],
-  "capabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "capabilities": []
 }
