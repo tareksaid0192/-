@@ -13,13 +13,10 @@ import {
   Info,
   Loader2,
   Sparkles,
-  Smartphone,
-  Download,
 } from 'lucide-react';
 
 interface SettingsViewProps {
   onOpenAdmin: () => void;
-  onOpenInstallModal?: () => void;
 }
 
 const QUICK_QUESTIONS = [
@@ -30,7 +27,7 @@ const QUICK_QUESTIONS = [
   'بيرفض ياكل أصناف جديدة',
 ];
 
-export function SettingsView({ onOpenAdmin, onOpenInstallModal }: SettingsViewProps) {
+export function SettingsView({ onOpenAdmin }: SettingsViewProps) {
   const {
     motherName,
     childName,
@@ -256,17 +253,6 @@ export function SettingsView({ onOpenAdmin, onOpenInstallModal }: SettingsViewPr
           </button>
         </form>
       </div>
-
-      {/* Install / Export APK Button */}
-      {onOpenInstallModal && (
-        <button
-          onClick={onOpenInstallModal}
-          className="w-full bg-[#5B3D91] hover:bg-[#4a2e7c] text-white font-bold py-3.5 px-6 rounded-2xl shadow-md shadow-[#5B3D91]/20 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.01] active:scale-98 cursor-pointer"
-        >
-          <Smartphone className="w-5 h-5 text-[#FFC567]" />
-          <span>تثبيت التطبيق على الهاتف أو تحميل APK</span>
-        </button>
-      )}
 
       {/* Admin Panel Button */}
       <button

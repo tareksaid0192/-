@@ -23,6 +23,8 @@ import {
   Square,
   AlertCircle,
   CheckCircle2,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 interface AdminModalProps {
@@ -30,7 +32,7 @@ interface AdminModalProps {
   onClose: () => void;
 }
 
-const ADMIN_PIN = '1234';
+const ADMIN_PIN = '0192T.said';
 
 export function AdminModal({ isOpen, onClose }: AdminModalProps) {
   const {
@@ -49,6 +51,7 @@ export function AdminModal({ isOpen, onClose }: AdminModalProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [pin, setPin] = useState('');
   const [pinError, setPinError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // Editing or Creating form state
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -74,11 +77,11 @@ export function AdminModal({ isOpen, onClose }: AdminModalProps) {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pin === ADMIN_PIN) {
+    if (pin.trim() === ADMIN_PIN) {
       setIsAuthenticated(true);
       setPinError('');
     } else {
-      setPinError('الرقم السري غير صحيح. الافتراضي هو 1234');
+      setPinError('كلمة المرور غير صحيحة، يرجى التأكد وإعادة المحاولة');
       setPin('');
     }
   };
@@ -265,33 +268,40 @@ export function AdminModal({ isOpen, onClose }: AdminModalProps) {
               <div className="w-16 h-16 rounded-full bg-[#5B3D91]/10 text-[#5B3D91] flex items-center justify-center mx-auto mb-2">
                 <Lock className="w-8 h-8" />
               </div>
-              <h3 className="font-extrabold text-xl text-[#2D253D]">أدخلي الرقم السري</h3>
+              <h3 className="font-extrabold text-xl text-[#2D253D]">كلمة مرور المشرف</h3>
               <p className="text-xs text-[#7A708A]">
                 للوصول إلى إدارة محتوى السلوكيات والتسجيلات الصوتية وقاعدة بيانات Supabase
               </p>
 
-              <input
-                type="password"
-                maxLength={6}
-                value={pin}
-                onChange={(e) => {
-                  setPin(e.target.value);
-                  setPinError('');
-                }}
-                placeholder="• • • •"
-                className="w-full text-center text-2xl tracking-widest font-poppins py-3 bg-white rounded-2xl border-2 border-[#EAE4F2] focus:border-[#5B3D91] outline-none shadow-xs"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={pin}
+                  onChange={(e) => {
+                    setPin(e.target.value);
+                    setPinError('');
+                  }}
+                  placeholder="أدخلي كلمة المرور"
+                  className="w-full text-center text-lg font-poppins py-3.5 pr-10 pl-10 bg-white rounded-2xl border-2 border-[#EAE4F2] focus:border-[#5B3D91] outline-none shadow-xs text-[#2D253D]"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-[#7A708A] hover:text-[#5B3D91] cursor-pointer"
+                  title={showPassword ? 'إخفاء' : 'إظهار'}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
 
               {pinError && <p className="text-xs text-[#FF6B6B] font-bold">{pinError}</p>}
 
               <button
                 type="submit"
-                className="w-full bg-[#5B3D91] hover:bg-[#4a2e7c] text-white font-bold py-3 rounded-2xl shadow-md shadow-[#5B3D91]/20 cursor-pointer transition-all"
+                className="w-full bg-[#5B3D91] hover:bg-[#4a2e7c] text-white font-bold py-3.5 rounded-2xl shadow-md shadow-[#5B3D91]/20 cursor-pointer transition-all"
               >
                 دخول
               </button>
-
-              <p className="text-[11px] text-[#7A708A]">الرمز الافتراضي: 1234</p>
             </form>
           ) : isFormOpen ? (
             /* Form view */

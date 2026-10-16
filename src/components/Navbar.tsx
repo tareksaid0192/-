@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, FolderOpen, Star, Settings, Bell, Smartphone } from 'lucide-react';
+import { Home, FolderOpen, Star, Settings, Bell } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 
 export type TabType = 'home' | 'content' | 'tracker' | 'settings';
@@ -8,14 +8,12 @@ interface NavbarProps {
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
   onOpenNotifications?: () => void;
-  onOpenInstallModal?: () => void;
 }
 
 export function Navbar({
   activeTab,
   setActiveTab,
   onOpenNotifications,
-  onOpenInstallModal,
 }: NavbarProps) {
   const { motherName } = useApp();
 
@@ -43,14 +41,6 @@ export function Navbar({
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              onClick={onOpenInstallModal}
-              className="flex items-center gap-1.5 text-xs font-bold text-white bg-[#5B3D91] hover:bg-[#4a2e7c] px-3 py-1.5 rounded-full shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
-              title="تثبيت التطبيق أو تحميل APK"
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-              <span>تثبيت / APK</span>
-            </button>
             <button
               onClick={onOpenNotifications}
               className="w-9 h-9 rounded-full bg-[#F8F6FA] hover:bg-[#EAE4F2] text-[#5B3D91] flex items-center justify-center transition-colors cursor-pointer"

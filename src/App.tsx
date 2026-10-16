@@ -9,7 +9,6 @@ import { TrackerView } from './views/TrackerView';
 import { SettingsView } from './views/SettingsView';
 import { BehaviorDetailModal } from './views/BehaviorDetailModal';
 import { AdminModal } from './views/AdminModal';
-import { PWAInstallModal } from './components/PWAInstallModal';
 import { Behavior } from './types';
 import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
 
@@ -18,7 +17,6 @@ function AppContent() {
   const [selectedBehavior, setSelectedBehavior] = useState<Behavior | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
-  const [isInstallOpen, setIsInstallOpen] = useState(false);
   const { toast, hideToast, motherName } = useApp();
 
   return (
@@ -28,7 +26,6 @@ function AppContent() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenNotifications={() => setIsNotifOpen(true)}
-        onOpenInstallModal={() => setIsInstallOpen(true)}
       />
 
       {/* Main Container */}
@@ -49,7 +46,6 @@ function AppContent() {
         {activeTab === 'settings' && (
           <SettingsView
             onOpenAdmin={() => setIsAdminOpen(true)}
-            onOpenInstallModal={() => setIsInstallOpen(true)}
           />
         )}
       </main>
@@ -67,12 +63,6 @@ function AppContent() {
       <AdminModal
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
-      />
-
-      {/* PWA / APK Install Modal */}
-      <PWAInstallModal
-        isOpen={isInstallOpen}
-        onClose={() => setIsInstallOpen(false)}
       />
 
       {/* Notifications Drawer */}
